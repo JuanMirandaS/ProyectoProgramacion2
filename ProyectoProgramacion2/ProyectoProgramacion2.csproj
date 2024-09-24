@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
     <Folder Include="DTO\" />
     <Folder Include="Modelo\" />
     <Folder Include="Response\" />
