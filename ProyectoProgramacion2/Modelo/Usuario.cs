@@ -1,4 +1,6 @@
-﻿namespace ProyectoProgramacion2.Modelo
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProyectoProgramacion2.Modelo
 {
     public class Usuario
     {
@@ -7,6 +9,8 @@
         public string Nombre { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        [ForeignKey("Rol")]
         public int RolId { get; set; }
 
     }

@@ -2,19 +2,19 @@
 {
     public class Tarea
     {
-        public int idTarea { get; set; }
+        public int Id { get; set; }
 
-        public DateTime fechaInicio { get; set; }
+        public DateTime FechaInicio { get; set; }
 
-        public string estadoTarea { get; set; }
+        public string EstadoTarea { get; set; }
 
-        public int horas { get; set; }
+        public int Horas { get; set; }
 
-        public string area { get; set; }
+        public string Area { get; set; }
 
-        public int idProyecto { get; set; }
+        public int IdProyecto { get; set; }
 
-        public int idEmpleado { get; set; }
+        public int IdEmpleado { get; set; }
 
     }
 }

@@ -1,12 +1,10 @@
 ﻿namespace ProyectoProgramacion2.Modelo
 {
-    public class Rol
+    public class Herramienta
     {
 
         public int Id { get; set; }
         public string Nombre { get; set; }
 
-
-        public ICollection<Usuario> Usuarios { get; set; }
     }
 }
