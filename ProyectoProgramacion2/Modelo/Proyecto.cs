@@ -9,5 +9,7 @@
         public int HorasTrabajadas { get; set; }
         public required int HorasTotales { get; set; }
         public required DateTime FechaCreacion { get; set; }
+
+        public ICollection<Tarea> Tareas { get; set; }
     }
 }
