@@ -20,7 +20,6 @@ namespace ProyectoProgramacion2.Servicio
         {
             Tarea tarea = await context.Tarea.FindAsync(id);
             return tarea;
-        
         }
         public async Task<bool> IngresarTarea(Tarea tarea)
         {
