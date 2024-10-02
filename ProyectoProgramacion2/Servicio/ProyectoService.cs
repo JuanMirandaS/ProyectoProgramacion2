@@ -1,7 +1,8 @@
 ﻿using ProyectoProgramacion2.Data;
 using Microsoft.EntityFrameworkCore;
 using ProyectoProgramacion2.Modelo;
-
+using System.Threading;
+using ProyectoProgramacion2.DTO;
 namespace ProyectoProgramacion2.Servicio
 {
     public class ProyectoService
@@ -21,56 +22,36 @@ namespace ProyectoProgramacion2.Servicio
             Proyecto proyecto = await context.Proyecto.FindAsync(id);
             return proyecto;
         }
-        /*public async Task<bool> IngresarProyecto(Proyecto proyecto)
-        {
-
-          
-            
-
-        }*/
-        public async Task<bool> DeleteProyecto(int id)
+        public async Task<bool> IngresarProyecto(ProyectoDTO proyecto)
         {
             try
             {
-                var proyecto = await context.Proyecto.FindAsync(id);
-
-                if (proyecto == null)
+                var nuevoProyecto = new Proyecto
                 {
-                    return false; // La herramienta no fue encontrada
-                }
+                    Nombre = proyecto.Nombre,
+                    Descripcion = proyecto.Descripcion,
+                    Estado = proyecto.Estado,
+                    HorasTotales = proyecto.HorasTotales
 
-                context.Proyecto.Remove(proyecto);
+
+                };
+
+                context.Proyecto.Add(nuevoProyecto);
+
                 await context.SaveChangesAsync();
 
-                return true; // Herramienta eliminada exitosamente
+                return true;
             }
             catch (Exception ex)
             {
-                // Manejar el error (logging, etc.)
+
                 return false;
             }
+
+
+
+
         }
-        public async Task<bool> UpdateProyecto(Proyecto proyectoActualizado)
-        {
-            try
-            {
-                var proyectoExistente = await context.Proyecto.FindAsync(proyectoActualizado.Id);
 
-                if (proyectoExistente == null)
-                {
-                    return false; // La herramienta no fue encontrada
-                }
-
-                //Rellenar este metodo las propiedades de la herramienta existente con los nuevos valores
-              
-
-                return true; // Herramienta actualizada exitosamente
-            }
-            catch (Exception ex)
-            {
-                // Manejar el error (logging, etc.)
-                return false;
-            }
-        }
     }
 }

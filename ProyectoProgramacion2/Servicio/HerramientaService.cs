@@ -1,7 +1,7 @@
 ﻿using ProyectoProgramacion2.Data;
 using ProyectoProgramacion2.Modelo;
 using Microsoft.EntityFrameworkCore;
-
+using ProyectoProgramacion2.DTO;
 namespace ProyectoProgramacion2.Servicio
 {
     public class HerramientaService
@@ -12,7 +12,7 @@ namespace ProyectoProgramacion2.Servicio
         {
             context = _context;
         }
-        public async Task<List<Herramienta>> ListaTareas()
+        public async Task<List<Herramienta>> ListaHerramientas()
         {
             List<Herramienta> herramientas = await context.Herramienta.ToListAsync();
             return herramientas;
@@ -22,7 +22,7 @@ namespace ProyectoProgramacion2.Servicio
             Herramienta herramienta = await context.Herramienta.FindAsync(id);
             return herramienta;
         }
-        public async Task<bool> IngresarHerramienta(Herramienta herramienta)
+        public async Task<bool> IngresarHerramienta(HerramientaDTO herramienta)
         {
 
             try
@@ -47,54 +47,7 @@ namespace ProyectoProgramacion2.Servicio
             }
 
         }
-        public async Task<bool> DeleteHerramienta(int id)
-        {
-            try
-            {
-                var herramienta = await context.Herramienta.FindAsync(id);
 
-                if ( herramienta == null)
-                {
-                    return false; // La herramienta no fue encontrada
-                }
-
-                context.Herramienta.Remove(herramienta);
-                await context.SaveChangesAsync();
-
-                return true; // Herramienta eliminada exitosamente
-            }
-            catch (Exception ex)
-            {
-                // Manejar el error (logging, etc.)
-                return false;
-            }
-        }
-        public async Task<bool> UpdateHerramienta(Herramienta herramientaActualizada)
-        {
-            try
-            {
-                var herramientaExistente = await context.Herramienta.FindAsync(herramientaActualizada.Id);
-
-                if (herramientaExistente == null)
-                {
-                    return false; // La herramienta no fue encontrada
-                }
-
-                // Actualizar las propiedades de la herramienta existente con los nuevos valores
-                herramientaExistente.Nombre = herramientaActualizada.Nombre;
-            
-
-                context.Herramienta.Update(herramientaExistente);
-                await context.SaveChangesAsync();
-
-                return true; // Herramienta actualizada exitosamente
-            }
-            catch (Exception ex)
-            {
-                // Manejar el error (logging, etc.)
-                return false;
-            }
-        }
 
 
 

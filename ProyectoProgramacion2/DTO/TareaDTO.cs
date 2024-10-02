@@ -2,7 +2,7 @@
 {
     public class TareaDTO
     {
-        public string Estado { get; set; }
+        public string EstadoTarea { get; set; }
         public int Horas { get; set; }
         public string Area { get; set; }
         public int ProyectoID { get; set; }

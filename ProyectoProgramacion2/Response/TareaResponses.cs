@@ -7,8 +7,6 @@ namespace ProyectoProgramacion2.Response
         public class TareaResponse : ResponseBase<Tarea>
         {
         }
-
-        /*retorna una lista de tareas*/
         public class TareasResponse : ResponseBase<List<Tarea>>
         {
         }
