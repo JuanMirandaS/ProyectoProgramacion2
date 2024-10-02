@@ -52,8 +52,37 @@ namespace ProyectoProgramacion2.Servicio
                 return false;
             }
 
+        }  
+        public async Task<bool> ActualizarTarea(int id, TareaDTO tareaDTO)
+        {
+            try
+            {
+                // Busca la tarea existente por su ID
+                var tareaExistente = await context.Tarea.FindAsync(id);
+                if (tareaExistente == null)
+                {
+                    return false; // La tarea no existe
+                }
+
+                // Actualiza las propiedades de la tarea existente
+                tareaExistente.EstadoTarea = tareaDTO.EstadoTarea ?? tareaExistente.EstadoTarea; // Se puede mantener el valor anterior si es nulo
+                tareaExistente.Horas = tareaDTO.Horas;
+                tareaExistente.Area = tareaDTO.Area;
+                tareaExistente.ProyectoID = tareaDTO.ProyectoID;
+                tareaExistente.UsuarioID = tareaDTO.UsuarioID;
+                tareaExistente.SetHerramientas = tareaDTO.SetHerramientas ?? tareaExistente.SetHerramientas; // Se puede mantener el valor anterior si es nulo
+
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error en un logger o la consola
+                Console.WriteLine($"Error al actualizar la tarea: {ex.Message}");
+                return false; // Manejo de errores
+            }
         }
-   
 
     }
 }

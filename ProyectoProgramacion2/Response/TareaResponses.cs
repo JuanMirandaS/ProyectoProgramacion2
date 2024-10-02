@@ -14,5 +14,9 @@ namespace ProyectoProgramacion2.Response
         public class NuevaTareaResponse : ResponseBase<bool>
         {
         }
+        public class ActualizarTareaResponse : ResponseBase<bool>
+        {
+
+        }
     }
 }

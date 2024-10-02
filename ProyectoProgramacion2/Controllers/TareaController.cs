@@ -66,6 +66,17 @@ namespace ProyectoProgramacion2.Controllers
 
           return Ok(response);
       }
-      
+        [HttpPut("actualizar-tarea/{id}")]
+        public async Task<ActionResult<ActualizarTareaResponse>> UpdateTarea(int id, [FromBody] TareaDTO tareaDTO)
+        {
+            var resultado = await _tareaService.ActualizarTarea(id, tareaDTO);
+            var response = new ActualizarTareaResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Tarea actualizada correctamente"
+            };
+            return Ok(response); 
+        }
     }
 }
