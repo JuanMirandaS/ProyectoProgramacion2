@@ -14,6 +14,13 @@ namespace ProyectoProgramacion2.Response
         public class NuevoUsuarioResponse : ResponseBase<bool>
         {
         }
+        public class ActualizarUsuarioResponse : ResponseBase<bool>
+        {
 
+        }
+        public class EliminarUsuarioResponse : ResponseBase<bool>
+        {
+
+        }
     }
 }

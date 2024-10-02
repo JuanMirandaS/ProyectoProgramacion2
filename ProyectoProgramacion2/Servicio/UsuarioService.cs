@@ -49,5 +49,60 @@ namespace ProyectoProgramacion2.Servicio
                 return false;
             }
         }
+        public async Task<bool> ActualizarUsuario(int id, UsuarioDTO usuarioDTO)
+        {
+            try
+            {
+                // Busca el usuario existente por su ID
+                var usuarioExistente = await context.Usuario.FindAsync(id);
+                if (usuarioExistente == null)
+                {
+                    return false; // El usuario no existe
+                }
+
+                // Actualiza las propiedades del usuario existente
+                usuarioExistente.Nombre = usuarioDTO.Nombre ?? usuarioExistente.Nombre; // Se puede mantener el valor anterior si es nulo
+                usuarioExistente.Password = usuarioDTO.Password;
+                usuarioExistente.Email = usuarioDTO.Email;
+                usuarioExistente.RolId = usuarioDTO.RolId;
+
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error en un logger o la consola
+                Console.WriteLine($"Error al actualizar el usuario: {ex.Message}");
+                return false; // Manejo de errores
+            }
+        }
+
+        public async Task<bool> EliminarUsuario(int id)
+        {
+            try
+            {
+                // Busca el usuario por su ID
+                var usuarioExistente = await context.Usuario.FindAsync(id);
+                if (usuarioExistente == null)
+                {
+                    return false; // El usuario no existe
+                }
+
+                // Elimina el usuario encontrado
+                context.Usuario.Remove(usuarioExistente);
+
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error
+                Console.WriteLine($"Error al eliminar el usuario: {ex.Message}");
+                return false; // Manejo de errores
+            }
+        }
+
     }
 }

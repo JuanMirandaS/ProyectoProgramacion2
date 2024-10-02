@@ -64,6 +64,32 @@ namespace ProyectoProgramacion2.Controllers
 
             return Ok(response);
         }
+        [HttpPut("actualizar-usuario/{id}")]
+        public async Task<ActionResult<ActualizarUsuarioResponse>> UpdateUsuario(int id, [FromBody] UsuarioDTO usuarioDTO)
+        {
+            var resultado = await _usuarioService.ActualizarUsuario(id, usuarioDTO);
+            var response = new ActualizarUsuarioResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Usuario actualizado correctamente"
+            };
+            return Ok(response);
+        }
+
+        [HttpDelete("eliminar-usuario/{id}")]
+        public async Task<ActionResult<EliminarUsuarioResponse>> DeleteUsuario(int id)
+        {
+            var resultado = await _usuarioService.EliminarUsuario(id);
+            var response = new EliminarUsuarioResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Usuario eliminado correctamente"
+            };
+
+            return Ok(response); // 200 si el usuario fue eliminado correctamente
+        }
 
     }
 }
