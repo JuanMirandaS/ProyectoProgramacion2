@@ -23,5 +23,19 @@ namespace ProyectoProgramacion2.Servicio
             return rol;
 
         }
+        public async Task<List<Usuario>> ObtenerUsuariosPorRol(int rolId)
+        {
+            var rol = await context.Rol
+                .Include(r => r.Usuarios) // Incluye la colección de usuarios
+                .FirstOrDefaultAsync(r => r.Id == rolId);
+
+            if (rol == null)
+            {
+                return null; // O lanza una excepción si lo prefieres
+            }
+
+            return rol.Usuarios.ToList(); // Devuelve la lista de usuarios asociados al rol
+        }
+
     }
 }

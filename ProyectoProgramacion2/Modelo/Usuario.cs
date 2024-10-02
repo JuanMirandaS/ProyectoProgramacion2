@@ -10,6 +10,9 @@ namespace ProyectoProgramacion2.Modelo
         public string Password { get; set; }
         [ForeignKey("Rol")]
         public int RolId { get; set; }
-        public ICollection<Tarea> Tareas { get; set; } 
+        public ICollection<Tarea> Tareas { get; set; }
+
+ 
+
     }
 }
