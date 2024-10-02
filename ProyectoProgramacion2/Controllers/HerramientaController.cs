@@ -60,6 +60,32 @@ namespace ProyectoProgramacion2.Controllers
 
             return Ok(response);
         }
+        [HttpPut("actualizar-herramienta/{id}")]
+        public async Task<ActionResult<ActualizarHerramientaResponse>> UpdateHerramienta(int id, [FromBody] HerramientaDTO herramientaDTO)
+        {
+            var resultado = await _herramientaService.ActualizarHerramienta(id, herramientaDTO);
+            var response = new ActualizarHerramientaResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Herramienta actualizada correctamente"
+            };
+            return Ok(response);
+        }
+
+        [HttpDelete("eliminar-herramienta/{id}")]
+        public async Task<ActionResult<EliminarHerramientaResponse>> DeleteHerramienta(int id)
+        {
+            var resultado = await _herramientaService.EliminarHerramienta(id);
+            var response = new EliminarHerramientaResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Herramienta eliminada correctamente"
+            };
+
+            return Ok(response); // 200 si la herramienta fue eliminada correctamente
+        }
 
     }
 }

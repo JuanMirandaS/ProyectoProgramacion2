@@ -13,5 +13,13 @@ namespace ProyectoProgramacion2.Response
         public class NuevaHerramientaResponse : ResponseBase<bool>
         {
         }
+        public class ActualizarHerramientaResponse : ResponseBase<bool>
+        {
+
+        }
+        public class EliminarHerramientaResponse : ResponseBase<bool>
+        {
+
+        }
     }
 }
