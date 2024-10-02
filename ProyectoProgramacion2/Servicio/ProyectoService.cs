@@ -47,11 +47,58 @@ namespace ProyectoProgramacion2.Servicio
 
                 return false;
             }
-
-
-
-
         }
+        public async Task<bool> ActualizarProyecto(int id,ProyectoDTO proyectoDTO)
+        {
+            try
+            {
+                // Busca la tarea existente por su ID
+                var proyectoExistente = await context.Proyecto.FindAsync(id);
+                if (proyectoExistente == null)
+                {
+                    return false; // La tarea no existe
+                }
 
+                // Actualiza las propiedades de la tarea existente
+                proyectoExistente.Nombre = proyectoDTO.Nombre ?? proyectoExistente.Nombre; // Se puede mantener el valor anterior si es nulo
+                proyectoExistente.Descripcion = proyectoDTO.Descripcion;
+                proyectoExistente.Estado = proyectoDTO.Estado;
+                proyectoExistente.HorasTotales = proyectoDTO.HorasTotales;
+               
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error en un logger o la consola
+                Console.WriteLine($"Error al actualizar el proyecto: {ex.Message}");
+                return false; // Manejo de errores
+            }
+        }
+        public async Task<bool> EliminarProyecto(int id)
+        {
+            try
+            {
+                // Busca la tarea por su ID
+                var proyectoExistente = await context.Proyecto.FindAsync(id);
+                if (proyectoExistente == null)
+                {
+                    return false; // La tarea no existe
+                }
+                // Elimina la tarea encontrada
+                context.Proyecto.Remove(proyectoExistente);
+
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error
+                Console.WriteLine($"Error al eliminar el proyecto: {ex.Message}");
+                return false; // Manejo de errores
+            }
+        }
     }
 }

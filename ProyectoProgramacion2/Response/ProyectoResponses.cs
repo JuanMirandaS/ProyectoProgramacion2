@@ -15,5 +15,13 @@ namespace ProyectoProgramacion2.Response
         public class NuevoProyectoResponse : ResponseBase<bool>
         {
         }
+        public class ActualizarProyectoResponse : ResponseBase<bool>
+        {
+
+        }
+        public class EliminarProyectoResponse : ResponseBase<bool>
+        {
+
+        }
     }
 }

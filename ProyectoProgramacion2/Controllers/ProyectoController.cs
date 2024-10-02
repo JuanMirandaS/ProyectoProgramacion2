@@ -61,6 +61,30 @@ namespace ProyectoProgramacion2.Controllers
 
             return Ok(response);
         }
+        [HttpPut("actualizar-proyecto/{id}")]
+        public async Task<ActionResult<ActualizarProyectoResponse>> UpdateProyecto(int id, [FromBody] ProyectoDTO proyectoDTO)
+        {
+            var resultado = await _proyectoService.ActualizarProyecto(id, proyectoDTO);
+            var response = new ActualizarProyectoResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Proyecto actualizado correctamente"
+            };
+            return Ok(response);
+        }
+        [HttpDelete("eliminar-proyecto/{id}")]
+        public async Task<ActionResult<EliminarProyectoResponse>> DeleteTarea(int id)
+        {
+            var resultado = await _proyectoService.EliminarProyecto(id);
+            var response = new EliminarProyectoResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Proyecto eliminada correctamente"
+            };
 
+            return Ok(response); // 200 si el proyecto fue eliminado fue eliminada
+        }
     }
 }
