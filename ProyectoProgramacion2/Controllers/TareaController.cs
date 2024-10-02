@@ -78,5 +78,19 @@ namespace ProyectoProgramacion2.Controllers
             };
             return Ok(response); 
         }
+        [HttpDelete("eliminar-tarea/{id}")]
+        public async Task<ActionResult<EliminarTareaResponse>> DeleteTarea(int id)
+        {
+            var resultado = await _tareaService.EliminarTarea(id);
+            var response = new EliminarTareaResponse
+            {
+                Data = resultado,
+                Code = 200,
+                Message = "Tarea eliminada correctamente"
+            };
+
+            return Ok(response); // 200 si la tarea fue eliminada
+        }
+
     }
 }

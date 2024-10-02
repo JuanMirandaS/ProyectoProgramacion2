@@ -83,6 +83,31 @@ namespace ProyectoProgramacion2.Servicio
                 return false; // Manejo de errores
             }
         }
+        public async Task<bool> EliminarTarea(int id)
+        {
+            try
+            {
+                // Busca la tarea por su ID
+                var tareaExistente = await context.Tarea.FindAsync(id);
+                if (tareaExistente == null)
+                {
+                    return false; // La tarea no existe
+                }
+
+                // Elimina la tarea encontrada
+                context.Tarea.Remove(tareaExistente);
+
+                // Guarda los cambios en la base de datos
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Registra el error
+                Console.WriteLine($"Error al eliminar la tarea: {ex.Message}");
+                return false; // Manejo de errores
+            }
+        }
 
     }
 }

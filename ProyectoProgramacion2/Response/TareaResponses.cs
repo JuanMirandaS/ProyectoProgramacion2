@@ -10,11 +10,14 @@ namespace ProyectoProgramacion2.Response
         public class TareasResponse : ResponseBase<List<Tarea>>
         {
         }
-
         public class NuevaTareaResponse : ResponseBase<bool>
         {
         }
         public class ActualizarTareaResponse : ResponseBase<bool>
+        {
+
+        }
+        public class EliminarTareaResponse : ResponseBase<bool>
         {
 
         }
