@@ -1,6 +1,22 @@
-﻿namespace ProyectoProgramacion2.Controllers
+﻿
+using Microsoft.AspNetCore.Mvc;
+using ProyectoProgramacion2.Data;
+using ProyectoProgramacion2.Servicio;
+
+namespace ProyectoProgramacion2.Controllers
 {
-    public class UsuarioController
+
+    [ApiController]
+    [Route("ProyectoProgramacion2/[Controllers]")]
+    public class UsuarioController : Controller
     {
+        private readonly UsuarioService _usuarioService;
+
+        public UsuarioController(IServiceProvider serviceProvider)
+        {
+            var context = serviceProvider.GetRequiredService<ProyectoDBContext>();
+
+        }
+
     }
 }
