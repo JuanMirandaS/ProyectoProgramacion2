@@ -25,9 +25,19 @@ namespace ProyectoProgramacion2.Servicio
         }
         public async Task<bool> IngresarTarea(TareaDTO tarea)
         {
-
             try
             {
+                // Validación de existencia de proyecto
+                var proyectoExiste = await context.Proyecto.AnyAsync(p => p.Id == tarea.ProyectoID);
+                if (!proyectoExiste)
+                    throw new Exception("El proyecto ingresado no existe.");
+
+                // Validación de existencia de usuario
+                var usuarioExiste = await context.Usuario.AnyAsync(u => u.Id == tarea.UsuarioID);
+                if (!usuarioExiste)
+                    throw new Exception("El usuario ingresado no existe.");
+
+                // Crear nueva tarea si pasa las validaciones
                 var nuevaTarea = new Tarea
                 {
                     FechaInicio = DateTime.Now,
@@ -37,22 +47,20 @@ namespace ProyectoProgramacion2.Servicio
                     ProyectoID = tarea.ProyectoID,
                     UsuarioID = tarea.UsuarioID,
                     SetHerramientas = tarea.SetHerramientas
-
                 };
 
                 context.Tarea.Add(nuevaTarea);
-
                 await context.SaveChangesAsync();
 
                 return true;
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Error al ingresar tarea: {ex.Message}");
                 return false;
             }
+        }
 
-        }  
         public async Task<bool> ActualizarTarea(int id, TareaDTO tareaDTO)
         {
             try

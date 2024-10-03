@@ -30,6 +30,13 @@ namespace ProyectoProgramacion2.Servicio
         {
             try
             {
+                // Verifica si el rol existe antes de ingresar el usuario
+                var rolExistente = await context.Rol.FindAsync(usuario.RolId);
+                if (rolExistente == null)
+                {
+                    throw new ArgumentException($"El rol con ID {usuario.RolId} no existe.");
+                }
+
                 var nuevoUsuario = new Usuario
                 {
                     Nombre = usuario.Nombre,
@@ -38,8 +45,7 @@ namespace ProyectoProgramacion2.Servicio
                     RolId = usuario.RolId,
                 };
 
-                context.Usuario.Add(nuevoUsuario); 
-
+                context.Usuario.Add(nuevoUsuario);
                 await context.SaveChangesAsync();
 
                 return true;
